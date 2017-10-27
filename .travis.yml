@@ -15,7 +15,7 @@ deploy:
   region: "eu-west-1"
   role: "arn:aws:iam::881121095103:role/travis"
   runtime: "nodejs6.10"
-  handler_name: "handler"
+  handler_name: "bundle/handler"
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
 
