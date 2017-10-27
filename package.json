@@ -1,11 +1,11 @@
 {
-  "name": "cycle2work-func-auth",
+  "name": "cycle2work-auth",
   "version": "1.0.0",
   "description": "Cycle2work auth function",
   "main": "bundle/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mondora/cycle2work-func-auth"
+    "url": "https://github.com/mondora/cycle2work-auth"
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
