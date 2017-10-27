@@ -1,0 +1,26 @@
+language: node_js
+
+node_js:
+  - 8
+
+services:
+  - mongodb
+
+env:
+  - MONGODB_URL=mongodb://localhost:27017/test
+
+deploy:
+  provider: lambda
+  function_name: "cycle2work-func-auth"
+  region: "eu-west-1"
+  role: "arn:aws:iam::881121095103:role/travis"
+  runtime: "nodejs6.10"
+  handler_name: "handler"
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+
+script:
+  - yarn lint
+  - yarn coverage
+  - yarn codecov
+  - yarn build
