@@ -15,9 +15,16 @@ deploy:
   region: "eu-west-1"
   role: "arn:aws:iam::881121095103:role/travis"
   runtime: "nodejs6.10"
-  handler_name: "bundle/handler"
+  module_name: "bundle/index"
+  handler_name: "handler"
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
+  environment_variables:
+    - STRAVA_ACCESS_TOKEN=$STRAVA_ACCESS_TOKEN
+    - STRAVA_CLIENT_ID=$STRAVA_CLIENT_ID
+    - STRAVA_CLIENT_SECRET=$STRAVA_CLIENT_SECRET
+    - MONGODB_URL=mongodb://localhost:27017/test
+    - LOG_LEVEL=debug
 
 script:
   - yarn lint
