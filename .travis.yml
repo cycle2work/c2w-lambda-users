@@ -6,6 +6,9 @@ node_js:
 services:
   - mongodb
 
+env:
+  - MONGODB_URL=mongodb://localhost:27017/test
+
 deploy:
   provider: lambda
   function_name: "cycle2work-auth-$TRAVIS_BRANCH"
