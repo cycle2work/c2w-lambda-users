@@ -1,7 +1,7 @@
-import { getToken } from "./services/strava";
+import { getToken, listAthleteClubs } from "./services/strava";
 
 import { log } from "./services/logger";
-import { upsertUser } from "./services/mongo-db";
+import { upsertUser, upsertClub } from "./services/mongo-db";
 
 export default async function pipeline(event, context, callback) {
 
@@ -17,7 +17,19 @@ export default async function pipeline(event, context, callback) {
 
         log.info({ athlete });
 
-        await upsertUser(athlete.id, { access_token, ...athlete });
+        const clubs = await listAthleteClubs({ access_token });
+
+        await upsertUser(athlete.id, {
+            access_token,
+            ...athlete
+        });
+
+        await clubs.forEach(async (club) => {
+            await upsertClub(club.id, {
+                access_token,
+                ...club
+            });
+        });
 
         callback(null, {
             statusCode: 200,

@@ -26,6 +26,5 @@ STRAVA_ACCESS_TOKEN="your_strava_access_token"
 STRAVA_CLIENT_ID="your_strava_client_id"
 STRAVA_CLIENT_SECRET="your_strava_client_secret"
 STRAVA_REDIRECT_URI=http://localhost:3000/token
-STRAVA_CODE_TEST="code_for_tests"
 LOG_LEVEL=debug
 ```

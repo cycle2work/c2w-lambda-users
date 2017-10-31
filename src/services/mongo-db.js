@@ -2,7 +2,8 @@ import { MongoClient } from "mongodb";
 
 import {
     MONGODB_URL,
-    USERS_COLLECTION
+    USERS_COLLECTION,
+    CLUBS_COLLECTION
 } from "../config";
 
 let dbInstance;
@@ -19,6 +20,15 @@ export async function upsertUser(id, user) {
     await db.collection(USERS_COLLECTION).updateOne(
         { _id: id },
         { $set: user },
+        { upsert: true }
+    );
+}
+
+export async function upsertClub(id, club) {
+    const db = await getMongoClient();
+    await db.collection(CLUBS_COLLECTION).updateOne(
+        { _id: id },
+        { $set: club },
         { upsert: true }
     );
 }

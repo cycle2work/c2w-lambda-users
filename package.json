@@ -13,6 +13,7 @@
     "bunyan": "^1.8.12",
     "dotenv": "^2.0.0",
     "mongodb": "^2.2.33",
+    "nock": "^9.0.27",
     "strava-v3": "^1.14.0"
   },
   "devDependencies": {
