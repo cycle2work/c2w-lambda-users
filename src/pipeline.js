@@ -20,13 +20,21 @@ export default async function pipeline(event, context, callback) {
         await upsertUser(athlete.id, { access_token, ...athlete });
 
         callback(null, {
-            statusCode: 200
+            statusCode: 200,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ msg: "Entity created" })
         });
 
     } catch (error) {
         log.debug({ error });
         callback(null, {
-            statusCode: 400
+            statusCode: 400,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ msg: "Error" })
         });
     }
 
