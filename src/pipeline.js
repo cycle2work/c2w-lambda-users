@@ -30,4 +30,5 @@ export default async function pipeline(event, context, callback) {
         });
     }
 
+    context.succeed();
 }
