@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/mondora/cycle2work-auth.svg?branch=master)](https://travis-ci.org/mondora/cycle2work-auth)
-[![Dependency Status](https://david-dm.org/mondora/cycle2work-auth.svg)](https://david-dm.org/mondora/cycle2work-auth)
-[![devDependency Status](https://david-dm.org/mondora/cycle2work-auth/dev-status.svg)](https://david-dm.org/mondora/cycle2work-auth#info=devDependencies)
+[![Build Status](https://travis-ci.org/cycle2work/c2w-lambda-users.svg?branch=master)](https://travis-ci.org/cycle2work/c2w-lambda-users)
+[![Dependency Status](https://david-dm.org/cycle2work/c2w-lambda-users.svg)](https://david-dm.org/cycle2work/c2w-lambda-users)
+[![devDependency Status](https://david-dm.org/cycle2work/c2w-lambda-users/dev-status.svg)](https://david-dm.org/cycle2work/c2w-lambda-users#info=devDependencies)
 
-# cycle2work-auth
+# c2w-lambda-users
 
 AWS Lambda function to persist user data and enjoy [`Cycle2work`](https://cycle2work.io).
 
