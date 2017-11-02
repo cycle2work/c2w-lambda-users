@@ -5,11 +5,14 @@ import { upsertUser, upsertClub } from "./services/mongo-db";
 
 export default async function pipeline(event, context, callback) {
 
-    log.debug({ event });
-
-    const { queryStringParameters: { code } } = event;
+    context.callbackWaitsForEmptyEventLoop = false;
 
     try {
+
+        log.debug({ event });
+
+        const { queryStringParameters: { code } } = event;
+
         const response = await getToken(code);
 
         const { access_token } = response;
