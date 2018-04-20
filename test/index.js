@@ -6,10 +6,7 @@ import sinonChai from "sinon-chai";
 chai.use(sinonChai);
 
 import { handler } from "index";
-import {
-    CLUBS_COLLECTION,
-    USERS_COLLECTION,
-} from "config";
+import { CLUBS_COLLECTION, USERS_COLLECTION } from "config";
 
 import {
     mockedAccesstoken,
@@ -32,7 +29,6 @@ nock("https://www.strava.com")
     .reply(200, listAthleteClubs());
 
 describe("`Cycle2work auth function`", () => {
-
     let db;
     let context;
     let callback;
@@ -61,10 +57,16 @@ describe("`Cycle2work auth function`", () => {
 
         expect(callback).to.have.been.calledOnce;
 
-        const users = await db.collection(USERS_COLLECTION).find({}).toArray();
+        const users = await db
+            .collection(USERS_COLLECTION)
+            .find({})
+            .toArray();
         expect(users).to.be.empty;
 
-        const clubs = await db.collection(CLUBS_COLLECTION).find({}).toArray();
+        const clubs = await db
+            .collection(CLUBS_COLLECTION)
+            .find({})
+            .toArray();
         expect(clubs).to.be.empty;
     });
 
@@ -73,17 +75,24 @@ describe("`Cycle2work auth function`", () => {
 
         expect(callback).to.have.been.calledOnce;
 
-        const users = await db.collection(USERS_COLLECTION).find({}).toArray();
+        const users = await db
+            .collection(USERS_COLLECTION)
+            .find({})
+            .toArray();
         expect(users.length).to.be.equal(1);
 
         const [user] = users;
         expect(user).to.be.deep.equal({
             _id: user.id,
             access_token: mockedAccesstoken,
-            ...mockedAthlete
+            ...mockedAthlete,
+            clubs: [mockedClub]
         });
 
-        const clubs = await db.collection(CLUBS_COLLECTION).find({}).toArray();
+        const clubs = await db
+            .collection(CLUBS_COLLECTION)
+            .find({})
+            .toArray();
         expect(clubs.length).to.be.equal(1);
         const [club] = clubs;
 
