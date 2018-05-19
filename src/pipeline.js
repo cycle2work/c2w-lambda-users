@@ -41,7 +41,7 @@ export default async function pipeline(event, context, callback) {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true
             },
-            body: JSON.stringify({ msg: "Entity created" })
+            body: JSON.stringify(athlete)
         });
     } catch (error) {
         log.debug({ error });
