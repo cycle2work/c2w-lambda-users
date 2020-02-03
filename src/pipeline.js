@@ -15,7 +15,7 @@ export default async function pipeline(event, context, callback) {
 
         const response = await getToken(code);
 
-        const { access_token } = response;
+        const { access_token, refresh_token, expires_at } = response;
         const { athlete } = response;
 
         log.info({ athlete });
@@ -24,6 +24,8 @@ export default async function pipeline(event, context, callback) {
 
         await upsertUser(athlete.id, {
             access_token,
+            refresh_token,
+            expires_at,
             clubs,
             ...athlete
         });

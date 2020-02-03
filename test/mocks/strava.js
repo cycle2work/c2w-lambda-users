@@ -30,11 +30,15 @@ export const mockedAthlete = {
     "updated_at": "2013-09-04T20:00:50Z"
 };
 
-export const mockedAccesstoken = "83ebeabdec09f6670863766f792ead24d61fe3f9";
+export const mockedAccesstoken = "a4b945687g...";
+export const mockedRefreshtoken = "e5n567567...";
+export const mockedExpireAt = "1568775134";
 
 export function getValidToken() {
     return {
         access_token: mockedAccesstoken,
+        refresh_token: mockedRefreshtoken,
+        expires_at: mockedExpireAt,
         athlete: mockedAthlete
     };
 }

@@ -14,7 +14,9 @@ import {
     mockedClub,
     getInvalidToken,
     getValidToken,
-    listAthleteClubs
+    listAthleteClubs,
+    mockedRefreshtoken,
+    mockedExpireAt
 } from "./mocks/strava";
 
 import { getMongoClient } from "services/mongo-db";
@@ -85,8 +87,10 @@ describe("`Cycle2work auth function`", () => {
         expect(user).to.be.deep.equal({
             _id: user.id,
             access_token: mockedAccesstoken,
-            ...mockedAthlete,
-            clubs: [mockedClub]
+            refresh_token: mockedRefreshtoken,
+            expires_at: mockedExpireAt,
+            clubs: [mockedClub],
+            ...mockedAthlete
         });
 
         const clubs = await db
