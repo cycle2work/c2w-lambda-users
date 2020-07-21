@@ -1,6 +1,4 @@
 import strava from "strava-v3";
 
-import { promisify } from "bluebird";
-
-export const getToken = promisify(strava.oauth.getToken);
-export const listAthleteClubs = promisify(strava.athlete.listClubs);
+export const getToken = (...args) => strava.oauth.refreshToken(...args);
+export const listAthleteClubs = (...args) => strava.athlete.listClubs(...args);

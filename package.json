@@ -8,43 +8,32 @@
     "url": "https://github.com/cycle2work/c2w-lambda-users"
   },
   "dependencies": {
-    "babel-polyfill": "^6.9.1",
+    "@babel/polyfill": "^7.10.4",
     "bluebird": "^3.5.1",
-    "bunyan": "^1.8.12",
-    "dotenv": "^2.0.0",
-    "mongodb": "^2.2.33",
-    "nock": "^9.0.27",
-    "strava-v3": "^1.14.0"
+    "bunyan": "^1.8.14",
+    "mongodb": "^3.5.9",
+    "strava-v3": "^2.0.5"
   },
   "devDependencies": {
-    "babel-cli": "^6.11.4",
-    "babel-core": "^6.11.4",
-    "babel-eslint": "^7.0.0",
-    "babel-plugin-istanbul": "^2.0.3",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "chai": "^3.5.0",
-    "codecov": "^1.0.1",
-    "eslint": "^3.1.1",
-    "mocha": "^3.1.2",
-    "nyc": "^8.3.1",
-    "sinon": "^1.17.5",
-    "sinon-chai": "^2.8.0"
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
+    "@types/jest": "^26.0.5",
+    "codecov": "^3.7.1",
+    "eslint": "^7.5.0",
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "nock": "^13.0.2"
   },
   "scripts": {
     "build": "babel src -d bundle",
-    "codecov": "NODE_ENV=test NODE_PATH=src nyc mocha report --reporter=text-lcov > coverage.lcov --recursive && codecov",
-    "coverage": "NODE_ENV=test NODE_PATH=src nyc mocha --recursive",
-    "dev": "npm test -- --watch",
-    "lint": "eslint src test",
-    "test": "NODE_PATH=src NODE_ENV=test mocha --compilers js:babel-core/register --recursive"
-  },
-  "nyc": {
-    "require": [
-      "babel-register"
-    ],
-    "sourceMap": false,
-    "instrument": false
+    "codecov": "codecov",
+    "coverage": "yarn test --coverage",
+    "dev": "jest --watch",
+    "lint": "eslint src",
+    "test": "jest"
   },
   "license": "Apache-2.0"
 }

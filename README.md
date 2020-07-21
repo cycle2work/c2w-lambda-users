@@ -1,7 +1,6 @@
 [![Build Status](https://travis-ci.org/cycle2work/c2w-lambda-users.svg?branch=master)](https://travis-ci.org/cycle2work/c2w-lambda-users)
 [![codecov](https://codecov.io/gh/cycle2work/c2w-lambda-users/branch/master/graph/badge.svg)](https://codecov.io/gh/cycle2work/c2w-lambda-users)
-[![Dependency Status](https://david-dm.org/cycle2work/c2w-lambda-users.svg)](https://david-dm.org/cycle2work/c2w-lambda-users)
-[![devDependency Status](https://david-dm.org/cycle2work/c2w-lambda-users/dev-status.svg)](https://david-dm.org/cycle2work/c2w-lambda-users#info=devDependencies)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 # c2w-lambda-users
 

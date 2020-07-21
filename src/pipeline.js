@@ -1,3 +1,5 @@
+import { map } from "bluebird";
+
 import { getToken, listAthleteClubs } from "./services/strava";
 
 import { log } from "./services/logger";
@@ -10,7 +12,7 @@ export default async function pipeline(event, context, callback) {
         log.debug({ event });
 
         const {
-            queryStringParameters: { code }
+            queryStringParameters: { code },
         } = event;
 
         const response = await getToken(code);
@@ -22,28 +24,44 @@ export default async function pipeline(event, context, callback) {
 
         const clubs = await listAthleteClubs({ access_token });
 
+        const mappedClubs = clubs.map(({ id, city, country, state, profile, name, member_count }) => ({
+            id,
+            city,
+            country,
+            state,
+            profile,
+            name,
+            member_count,
+        }));
+
+        const { firstname, lastname, city, country, state, id, profile, username } = athlete;
+
         await upsertUser(athlete.id, {
             access_token,
             refresh_token,
             expires_at,
-            clubs,
-            ...athlete
+            firstname,
+            lastname,
+            city,
+            country,
+            state,
+            id,
+            profile,
+            username,
+            clubs: mappedClubs,
         });
 
-        await clubs.forEach(async club => {
-            await upsertClub(club.id, {
-                access_token,
-                ...club
-            });
+        await map(mappedClubs, async (club) => {
+            await upsertClub(club.id, club);
         });
 
         callback(null, {
             statusCode: 200,
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": true
+                "Access-Control-Allow-Credentials": true,
             },
-            body: JSON.stringify(athlete)
+            body: JSON.stringify(athlete),
         });
     } catch (error) {
         log.debug({ error });
@@ -51,9 +69,9 @@ export default async function pipeline(event, context, callback) {
             statusCode: 400,
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": true
+                "Access-Control-Allow-Credentials": true,
             },
-            body: JSON.stringify({ msg: "Error" })
+            body: JSON.stringify({ msg: "Error" }),
         });
     }
 
