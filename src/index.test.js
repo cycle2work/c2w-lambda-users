@@ -26,16 +26,6 @@ describe("`Cycle2work auth function`", () => {
     beforeAll(async () => {
         mongoDb = new MongoMemoryServer();
         client = await getMongoClient(await mongoDb.getUri());
-        nock("https://www.strava.com")
-            .post("/oauth/token")
-            .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
-            .reply(400, getInvalidToken())
-            .post("/oauth/token")
-            .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
-            .reply(200, getValidToken())
-            .get("/api/v3/athlete/clubs?")
-            .times(2)
-            .reply(200, listAthleteClubs());
     });
 
     afterAll(async () => {
@@ -51,7 +41,16 @@ describe("`Cycle2work auth function`", () => {
         callback = jest.fn();
     });
 
+    afterEach(() => {
+        nock.cleanAll();
+    });
+
     it("Invalid code provided, do not persist user data", async () => {
+        nock("https://www.strava.com")
+            .post("/oauth/token")
+            .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
+            .reply(400, getInvalidToken());
+
         await handler({ queryStringParameters: { code: mockedRefreshtoken } }, context, callback);
 
         expect(callback).toHaveBeenCalledTimes(1);
@@ -63,6 +62,13 @@ describe("`Cycle2work auth function`", () => {
     });
 
     it("Valid code provided, persist user token and clubs", async () => {
+        nock("https://www.strava.com")
+            .post("/oauth/token")
+            .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
+            .reply(200, getValidToken())
+            .get("/api/v3/athlete/clubs?")
+            .reply(200, listAthleteClubs());
+
         await handler({ queryStringParameters: { code: mockedRefreshtoken } }, context, callback);
 
         expect(callback).toHaveBeenCalledTimes(1);
