@@ -1,5 +1,6 @@
 # c2w-lambda-users
 
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/cycle2work/c2w-lambda-users.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cycle2work/c2w-lambda-users/context:javascript)
 [![Build Status](https://travis-ci.org/cycle2work/c2w-lambda-users.svg?branch=master)](https://travis-ci.org/cycle2work/c2w-lambda-users)
 [![codecov](https://codecov.io/gh/cycle2work/c2w-lambda-users/branch/master/graph/badge.svg)](https://codecov.io/gh/cycle2work/c2w-lambda-users)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
