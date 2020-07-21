@@ -37,9 +37,8 @@ describe("`Cycle2work auth function`", () => {
     });
 
     afterAll(async () => {
-        await client.db(DB_NAME).dropCollection(USERS_COLLECTION);
-        await client.db(DB_NAME).dropCollection(CLUBS_COLLECTION);
-        await client.close();
+        await client.db(DB_NAME).dropDatabase();
+        await client.close(true);
     });
 
     beforeEach(() => {
