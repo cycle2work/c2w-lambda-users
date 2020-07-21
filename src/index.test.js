@@ -18,10 +18,10 @@ import { getMongoClient } from "./services/mongo-db";
 
 nock("https://www.strava.com")
     .post("/oauth/token")
-    .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
+    .query(true)
     .reply(400, getInvalidToken())
     .post("/oauth/token")
-    .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
+    .query(true)
     .reply(200, getValidToken())
     .get("/api/v3/athlete/clubs?")
     .times(2)
