@@ -17,17 +17,6 @@ import {
 
 import { getMongoClient } from "./services/mongo-db";
 
-nock("https://www.strava.com")
-    .post("/oauth/token")
-    .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
-    .reply(400, getInvalidToken())
-    .post("/oauth/token")
-    .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
-    .reply(200, getValidToken())
-    .get("/api/v3/athlete/clubs?")
-    .times(2)
-    .reply(200, listAthleteClubs());
-
 describe("`Cycle2work auth function`", () => {
     let mongoDb;
     let client;
@@ -37,6 +26,16 @@ describe("`Cycle2work auth function`", () => {
     beforeAll(async () => {
         mongoDb = new MongoMemoryServer();
         client = await getMongoClient(await mongoDb.getUri());
+        nock("https://www.strava.com")
+            .post("/oauth/token")
+            .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
+            .reply(400, getInvalidToken())
+            .post("/oauth/token")
+            .query({ refresh_token: mockedRefreshtoken, grant_type: "refresh_token" })
+            .reply(200, getValidToken())
+            .get("/api/v3/athlete/clubs?")
+            .times(2)
+            .reply(200, listAthleteClubs());
     });
 
     afterAll(async () => {
