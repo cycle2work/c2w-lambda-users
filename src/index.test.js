@@ -79,8 +79,8 @@ describe("`Cycle2work auth function`", () => {
 
         const clubs = await client.db(DB_NAME).collection(CLUBS_COLLECTION).find({}).toArray();
         expect(clubs).toHaveLength(1);
-        const [club] = clubs;
 
+        const [club] = clubs;
         expect(club).toMatchObject(mockedClub);
     });
 });
