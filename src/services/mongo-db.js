@@ -4,10 +4,10 @@ import { MONGODB_URL, USERS_COLLECTION, CLUBS_COLLECTION, DB_NAME } from "../con
 
 let clientInstance;
 
-export async function getMongoClient() {
+export async function getMongoClient(url) {
     if (!clientInstance) {
         /* eslint-disable-next-line */
-        clientInstance = await mongodb.connect(MONGODB_URL, {
+        clientInstance = await mongodb.connect(url, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
@@ -16,11 +16,11 @@ export async function getMongoClient() {
 }
 
 export async function upsertUser(id, user) {
-    const client = await getMongoClient();
+    const client = await getMongoClient(MONGODB_URL);
     await client.db(DB_NAME).collection(USERS_COLLECTION).updateOne({ id }, { $set: user }, { upsert: true });
 }
 
 export async function upsertClub(id, club) {
-    const client = await getMongoClient();
+    const client = await getMongoClient(MONGODB_URL);
     await client.db(DB_NAME).collection(CLUBS_COLLECTION).updateOne({ id }, { $set: club }, { upsert: true });
 }

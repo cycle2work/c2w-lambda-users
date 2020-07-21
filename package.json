@@ -25,6 +25,7 @@
     "eslint": "^7.5.0",
     "husky": "^4.2.5",
     "jest": "^26.1.0",
+    "mongodb-memory-server": "^6.6.1",
     "nock": "^13.0.2"
   },
   "scripts": {

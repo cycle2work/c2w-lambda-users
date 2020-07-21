@@ -1,4 +1,5 @@
 import nock from "nock";
+import { MongoMemoryServer } from "mongodb-memory-server";
 
 import { handler } from ".";
 import { CLUBS_COLLECTION, USERS_COLLECTION, DB_NAME } from "./config";
@@ -28,17 +29,20 @@ nock("https://www.strava.com")
     .reply(200, listAthleteClubs());
 
 describe("`Cycle2work auth function`", () => {
+    let mongoDb;
     let client;
     let context;
     let callback;
 
     beforeAll(async () => {
-        client = await getMongoClient();
+        mongoDb = new MongoMemoryServer();
+        client = await getMongoClient(await mongoDb.getUri());
     });
 
     afterAll(async () => {
         await client.db(DB_NAME).dropDatabase();
         await client.close(true);
+        await mongoDb.stop();
     });
 
     beforeEach(() => {
@@ -52,7 +56,6 @@ describe("`Cycle2work auth function`", () => {
         await handler({ queryStringParameters: { code: mockedRefreshtoken } }, context, callback);
 
         expect(callback).toHaveBeenCalledTimes(1);
-
         const users = await client.db(DB_NAME).collection(USERS_COLLECTION).find({}).toArray();
         expect(users).toHaveLength(0);
 
