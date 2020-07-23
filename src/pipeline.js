@@ -61,7 +61,7 @@ export default async function pipeline(event, context, callback) {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
             },
-            body: JSON.stringify(athlete),
+            body: JSON.stringify({ ...athlete, clubs: mappedClubs }),
         });
     } catch (error) {
         log.debug({ error });
