@@ -8,7 +8,7 @@
     "url": "https://github.com/cycle2work/c2w-lambda-users"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.10.4",
+    "@babel/polyfill": "^7.12.1",
     "bluebird": "^3.5.1",
     "bunyan": "^1.8.14",
     "mongodb": "^3.5.9",
